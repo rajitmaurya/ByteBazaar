@@ -30,7 +30,7 @@ const Navbar = () => {
           <div className="shrink-0">
             <Link to="/">
               <h2 className="text-2xl font-bold bg-linear-to-r from-cyan-600 to-fuchsia-600 bg-clip-text text-transparent hover:from-cyan-500 hover:to-fuchsia-500 transition-all duration-300 cursor-pointer">
-                ShopHub
+                ByteBazaar
               </h2>
             </Link>
           </div>
