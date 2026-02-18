@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Github } from 'lucide-react';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -22,17 +22,14 @@ const Footer = () => {
                             Elevate your digital lifestyle with our curated collection.
                         </p>
                         <div className="flex space-x-4 pt-2">
-                            <a href="#" className="text-gray-400 hover:text-cyan-600 transition-colors duration-300">
-                                <Facebook size={20} />
+                            <a href="https://github.com/rajitmaurya" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-600 transition-colors duration-300">
+                                <Github size={20} />
                             </a>
-                            <a href="#" className="text-gray-400 hover:text-cyan-600 transition-colors duration-300">
-                                <Twitter size={20} />
-                            </a>
-                            <a href="#" className="text-gray-400 hover:text-cyan-600 transition-colors duration-300">
-                                <Instagram size={20} />
-                            </a>
-                            <a href="#" className="text-gray-400 hover:text-cyan-600 transition-colors duration-300">
+                            <a href="https://www.linkedin.com/in/rajitmaurya/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-600 transition-colors duration-300">
                                 <Linkedin size={20} />
+                            </a>
+                            <a href="https://twitter.com/rajitmaurya" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-600 transition-colors duration-300">
+                                <Twitter size={20} />
                             </a>
                         </div>
                     </div>
