@@ -31,9 +31,8 @@ const Card = ({ product, onQuickView }) => {
       stars.push(
         <svg
           key={i}
-          className={`w-5 h-5 ${
-            i <= Math.round(rating) ? "text-yellow-400" : "text-gray-300"
-          }`}
+          className={`w-5 h-5 ${i <= Math.round(rating) ? "text-yellow-400" : "text-gray-300"
+            }`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -45,7 +44,7 @@ const Card = ({ product, onQuickView }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-72 group transform transition-transform duration-300 hover:-translate-y-2 relative">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full group transform transition-transform duration-300 hover:-translate-y-2 relative">
       <figure className="relative w-full h-48 overflow-hidden">
         <img
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
