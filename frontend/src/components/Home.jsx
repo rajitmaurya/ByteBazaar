@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Auto Slider */}
-      <div className="relative h-[600px] overflow-hidden bg-gray-900 border-b border-gray-800">
+      <div className="relative h-[500px] overflow-hidden bg-gray-900 border-b border-gray-800">
         {/* Background Images */}
         {heroImages.map((img, index) => (
           <div
@@ -96,8 +96,8 @@ const Home = () => {
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
-                      ? "bg-white w-8"
-                      : "bg-white/50 hover:bg-white/80"
+                    ? "bg-white w-8"
+                    : "bg-white/50 hover:bg-white/80"
                     }`}
                 />
               ))}
@@ -133,8 +133,8 @@ const Home = () => {
                     key={category}
                     onClick={() => setSelectedCategory(category)}
                     className={`px-4 py-1.5 rounded-full font-medium text-sm transition-all duration-300 whitespace-nowrap border ${selectedCategory === category
-                        ? "bg-gray-900 text-white border-gray-900 shadow-md"
-                        : "bg-white text-gray-600 border-gray-200 hover:border-cyan-400 hover:text-cyan-600"
+                      ? "bg-gray-900 text-white border-gray-900 shadow-md"
+                      : "bg-white text-gray-600 border-gray-200 hover:border-cyan-400 hover:text-cyan-600"
                       }`}
                   >
                     {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -148,8 +148,8 @@ const Home = () => {
               <button
                 onClick={() => setGridColumns(2)}
                 className={`p-1.5 rounded-md transition-all duration-300 ${gridColumns === 2
-                    ? "bg-white text-cyan-600 shadow-sm"
-                    : "text-gray-400 hover:text-gray-600"
+                  ? "bg-white text-cyan-600 shadow-sm"
+                  : "text-gray-400 hover:text-gray-600"
                   }`}
                 title="2 Columns"
               >
@@ -158,8 +158,8 @@ const Home = () => {
               <button
                 onClick={() => setGridColumns(3)}
                 className={`p-1.5 rounded-md transition-all duration-300 ${gridColumns === 3
-                    ? "bg-white text-cyan-600 shadow-sm"
-                    : "text-gray-400 hover:text-gray-600"
+                  ? "bg-white text-cyan-600 shadow-sm"
+                  : "text-gray-400 hover:text-gray-600"
                   }`}
                 title="3 Columns"
               >
@@ -168,8 +168,8 @@ const Home = () => {
               <button
                 onClick={() => setGridColumns(4)}
                 className={`p-1.5 rounded-md transition-all duration-300 ${gridColumns === 4
-                    ? "bg-white text-cyan-600 shadow-sm"
-                    : "text-gray-400 hover:text-gray-600"
+                  ? "bg-white text-cyan-600 shadow-sm"
+                  : "text-gray-400 hover:text-gray-600"
                   }`}
                 title="4 Columns"
               >
@@ -196,10 +196,10 @@ const Home = () => {
         {filteredProductsBySearch.length > 0 ? (
           <div
             className={`grid gap-8 ${gridColumns === 2
-                ? "grid-cols-1 md:grid-cols-2"
-                : gridColumns === 3
-                  ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              ? "grid-cols-1 md:grid-cols-2"
+              : gridColumns === 3
+                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
               }`}
           >
             {filteredProductsBySearch.map((product) => (
