@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import MailController from "./MailController.js";
+import sendMail from "./MailController.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -42,7 +43,7 @@ AuthController.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: email });
     if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "user already exist" });
     }
 
     //password matching...
@@ -59,9 +60,9 @@ AuthController.post("/login", async (req, res) => {
     );
 
     //send mail...
-    const subject = "Login Notification";
-    const text = `Hi ${user.username},\n\nThis is a notification that your account was just accessed. If this was you, you can safely ignore this email.`;
-    await sendMail({ to: user.email, subject, text });
+    // const subject = "Login Notification";
+    // const text = `Hi ${user.username},\n\nThis is a notification that your account was just accessed. If this was you, you can safely ignore this email.`;
+    // await sendMail({ to: user.email, subject, text });
 
     res.status(200).json({
       message: "Login successful",
