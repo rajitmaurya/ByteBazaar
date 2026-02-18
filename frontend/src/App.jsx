@@ -7,6 +7,8 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Checkout from "./components/Checkout";
+import Footer from "./components/Footer";
+
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -55,7 +57,9 @@ const App = () => {
             }
           />
         </Routes>
+        <Footer />
       </div>
+
     </Router>
   );
 };
