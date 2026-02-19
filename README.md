@@ -1,4 +1,4 @@
-# HyperMarket - E-commerce Platform
+# ByteBazaar - E-commerce Platform
 
 ## Overview
 
