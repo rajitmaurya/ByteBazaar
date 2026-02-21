@@ -14,7 +14,7 @@ HyperMarket is a comprehensive e-commerce platform built with React for the fron
 - **User Authentication**: Secure signup and sign-in functionality with JWT-based authentication.
 - **Admin Dashboard**: Role-based access control for administrators to manage the platform.
 
-### Customer Feature
+### Customer Features
 
 - **User Accounts**: Manage profile information, orders, and addresses.
 - **Order History**: View past orders and order details.
