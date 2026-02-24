@@ -2,6 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import mongoose from "mongoose";
 import MailController from "./MailController.js";
 import sendMail from "./MailController.js";
 import dotenv from "dotenv";
@@ -16,7 +17,15 @@ AuthController.post("/register", async (req, res) => {
   try {
     const { username, email, password, role } = req.body;
 
-    //  TODO use multer from dp upload profile pic
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // Check DB connection
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(500).json({ message: "Database connection not established. Please check your MongoDB URI and IP whitelist." });
+    }
+
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: "Email already exists" });
@@ -33,7 +42,12 @@ AuthController.post("/register", async (req, res) => {
 
     res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Registration error:", err);
+    res.status(500).json({
+      message: "Internal server error during registration",
+      error: err.message,
+      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    });
   }
 });
 
