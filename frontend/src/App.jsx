@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Checkout from "./components/Checkout";
 import Footer from "./components/Footer";
+import Shipping from "./components/Shipping";
 
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -48,6 +49,7 @@ const App = () => {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/shipping" element={<Shipping />} />
           <Route
             path="/checkout"
             element={
