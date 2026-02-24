@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../api/api";
 import {
   User,
   Mail,
@@ -30,14 +30,7 @@ const Profile = () => {
       }
 
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/auth/profile",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await API.get("/api/auth/profile");
         setUser(response.data);
         setLoading(false);
       } catch (err) {
@@ -72,12 +65,9 @@ const Profile = () => {
   const handleSaveProfile = async () => {
     const token = localStorage.getItem("token");
     try {
-      await axios.put(
-        "http://localhost:3000/api/auth/profile",
-        { username: editName },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+      await API.put(
+        "/api/auth/profile",
+        { username: editName }
       );
 
       setUser((prev) => ({ ...prev, username: editName }));

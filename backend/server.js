@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import AuthController from "./controllers/AuthController.js";
 import OrderController from "./controllers/OrderController.js";
 import connectDB from "./controllers/dbController.js";
+import sendMail from "./controllers/MailController.js";
 import cors from "cors";
 dotenv.config();
 
@@ -24,6 +25,8 @@ app.use("/api/orders", OrderController);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { User, Mail, Lock, ArrowRight } from "lucide-react";
-import axios from "axios";
+import API from "../api/api";
 import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
@@ -19,8 +19,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
+      const response = await API.post(
+        "/api/auth/register",
         formData
       );
       alert("User registered successfully");
@@ -31,7 +31,7 @@ const Signup = () => {
       console.error(error);
       alert(
         error.response?.data?.message ||
-          "Registration failed. Please try again."
+        "Registration failed. Please try again."
       );
     }
   };

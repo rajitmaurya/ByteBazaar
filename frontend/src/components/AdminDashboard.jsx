@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api/api";
 import { Users, ShoppingBag, DollarSign } from "lucide-react";
 
 
@@ -13,13 +13,7 @@ const AdminDashboard = () => {
     // Fetch users for admin view
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "http://localhost:3000/api/auth/profiles",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await API.get("/api/auth/profiles");
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users", error);
@@ -28,13 +22,7 @@ const AdminDashboard = () => {
 
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "http://localhost:3000/api/orders/all",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await API.get("/api/orders/all");
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders", error);
@@ -142,11 +130,10 @@ const AdminDashboard = () => {
                       <td className="px-6 py-4 text-gray-600">{u.email}</td>
                       <td className="px-6 py-4">
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            u.role === "admin"
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${u.role === "admin"
                               ? "bg-purple-100 text-purple-800"
                               : "bg-green-100 text-green-800"
-                          }`}
+                            }`}
                         >
                           {u.role || "user"}
                         </span>
@@ -199,13 +186,12 @@ const AdminDashboard = () => {
                       </td>
                       <td className="px-6 py-4">
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            order.status === "delivered"
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${order.status === "delivered"
                               ? "bg-green-100 text-green-800"
                               : order.status === "processing"
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-gray-100 text-gray-800"
-                          }`}
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-gray-100 text-gray-800"
+                            }`}
                         >
                           {order.status}
                         </span>
