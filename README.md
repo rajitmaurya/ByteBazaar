@@ -2,7 +2,7 @@
 
 ## Overview
 
-HyperMarket is a comprehensive e-commerce platform built with React for the frontend and Node.js with Express for the backend. It offers a wide range of features for both customers and administrators, including product browsing, shopping cart functionality, secure checkout, and an admin dashboard for managing products, orders, categories, and users.
+ByteBazaar is a comprehensive e-commerce platform built with React for the frontend and Node.js with Express for the backend. It offers a wide range of features for both customers and administrators, including product browsing, shopping cart functionality, secure checkout, and an admin dashboard for managing products, orders, categories, and users.
 
 ## Features
 
