@@ -9,17 +9,25 @@ import {
   LogOut,
   Loader,
   Shield,
+  Camera,
+  Trash2,
+  Plus,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
   //TODO: add update profile functionality
   const navigate = useNavigate();
+  const { updateUser } = useAuth();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -71,17 +79,66 @@ const Profile = () => {
       );
 
       setUser((prev) => ({ ...prev, username: editName }));
-      // Update local storage if needed
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      if (storedUser) {
-        storedUser.username = editName;
-        localStorage.setItem("user", JSON.stringify(storedUser));
-      }
+      updateUser({ ...user, username: editName });
       setIsEditing(false);
     } catch (err) {
       console.error("Failed to update profile", err);
       // Optionally set an error state here specifically for the edit action
       alert("Failed to update profile");
+    }
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file type and size
+    if (!file.type.match("image.*")) {
+      alert("Please select an image file");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File size should be less than 5MB");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("profilePicture", file);
+
+    setUploading(true);
+    try {
+      const response = await API.put("/api/auth/profile", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setUser(response.data.user);
+      updateUser(response.data.user);
+      alert("Profile picture updated successfully!");
+    } catch (err) {
+      console.error("Error uploading profile picture:", err);
+      alert("Failed to upload profile picture");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDeletePicture = async () => {
+    if (!window.confirm("Are you sure you want to delete your profile picture?"))
+      return;
+
+    setUploading(true);
+    try {
+      const response = await API.delete("/api/auth/profile/picture");
+      setUser(response.data.user);
+      updateUser(response.data.user);
+      alert("Profile picture deleted successfully!");
+    } catch (err) {
+      console.error("Error deleting profile picture:", err);
+      alert("Failed to delete profile picture");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -134,10 +191,48 @@ const Profile = () => {
           <div className="px-8 pb-8">
             <div className="relative flex justify-between items-end -mt-16 mb-6">
               <div className="flex items-end">
-                <div className="h-32 w-32 bg-white rounded-2xl p-2 shadow-lg">
-                  <div className="h-full w-full bg-cyan-100 rounded-xl flex items-center justify-center text-4xl font-bold text-cyan-600 uppercase">
-                    {user?.username?.charAt(0) || "U"}
+                <div className="h-32 w-32 bg-white rounded-2xl p-2 shadow-lg relative group">
+                  <div className="h-full w-full bg-cyan-100 rounded-xl overflow-hidden flex items-center justify-center text-4xl font-bold text-cyan-600 uppercase border-2 border-dashed border-cyan-200">
+                    {user?.profilePicture ? (
+                      <img
+                        src={`${API_BASE_URL}/${user.profilePicture}`}
+                        alt="Profile"
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      user?.username?.charAt(0) || "U"
+                    )}
                   </div>
+                  
+                  {/* Overlay for actions */}
+                  <div className="absolute inset-2 bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-3">
+                    <label className="cursor-pointer p-2 bg-white/20 hover:bg-white/40 rounded-full text-white transition-colors" title="Upload Picture">
+                      <Camera className="h-5 w-5" />
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        disabled={uploading}
+                      />
+                    </label>
+                    {user?.profilePicture && (
+                      <button
+                        onClick={handleDeletePicture}
+                        disabled={uploading}
+                        className="p-2 bg-red-500/80 hover:bg-red-500 rounded-full text-white transition-colors"
+                        title="Delete Picture"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
+                    )}
+                  </div>
+                  
+                  {uploading && (
+                    <div className="absolute inset-2 bg-white/60 rounded-xl flex items-center justify-center">
+                      <Loader className="h-6 w-6 text-cyan-600 animate-spin" />
+                    </div>
+                  )}
                 </div>
                 <div className="ml-6 mb-2 hidden sm:block">
                   {isEditing ? (

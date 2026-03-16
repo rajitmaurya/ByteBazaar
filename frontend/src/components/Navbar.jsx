@@ -23,6 +23,7 @@ const Navbar = () => {
 
   const { search, setSearch } = useSearch();
   const { user, logout } = useAuth();
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -98,7 +99,15 @@ const Navbar = () => {
                   to="/profile"
                   className="group flex items-center space-x-2 text-gray-600 hover:text-cyan-600 transition-all duration-300 relative"
                 >
-                  <User className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                  {user.profilePicture ? (
+                    <img
+                      src={`${API_BASE_URL}/${user.profilePicture}`}
+                      className="h-8 w-8 rounded-full object-cover border-2 border-transparent group-hover:border-cyan-500 transition-all"
+                      alt="Profile"
+                    />
+                  ) : (
+                    <User className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                  )}
                   <span className="font-medium">
                     {user.username || "User"}
                   </span>
@@ -213,7 +222,15 @@ const Navbar = () => {
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-600 hover:bg-gray-50"
                 >
                   <div className="flex items-center space-x-2">
-                    <User className="h-5 w-5" />
+                    {user.profilePicture ? (
+                      <img
+                        src={`${API_BASE_URL}/${user.profilePicture}`}
+                        className="h-6 w-6 rounded-full object-cover"
+                        alt="Profile"
+                      />
+                    ) : (
+                      <User className="h-5 w-5" />
+                    )}
                     <span>Profile ({user.username})</span>
                   </div>
                 </Link>
