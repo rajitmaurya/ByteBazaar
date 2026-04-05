@@ -14,6 +14,7 @@ import {
 import { useSelector } from "react-redux";
 import { useSearch } from "../context/SearchContext";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE_URL } from "../api/api";
 
 const Navbar = () => {
   const [searchFocus, setSearchFocus] = useState(false);
@@ -23,7 +24,6 @@ const Navbar = () => {
 
   const { search, setSearch } = useSearch();
   const { user, logout } = useAuth();
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 

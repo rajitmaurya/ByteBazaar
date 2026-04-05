@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API from "../api/api";
+import API, { API_BASE_URL } from "../api/api";
 import {
   User,
   Mail,
@@ -26,8 +26,6 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState("");
   const [uploading, setUploading] = useState(false);
-
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
   useEffect(() => {
     const fetchProfile = async () => {

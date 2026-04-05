@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// Use the provided Render backend URL. Ensure this is also set in your deployment platform's environment variables.
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://bytebazaar-1-1v1r.onrender.com";
+
 const API = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || "https://bytebazaar-1-1v1r.onrender.com",
+    baseURL: API_BASE_URL,
 });
 
 // Add a request interceptor to include the token in all requests
