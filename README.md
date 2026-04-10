@@ -54,7 +54,7 @@ ByteBazaar is a comprehensive e-commerce platform built with React for the front
 
 ### Database
 
-- **MongoDB**: NoSQL database for storing application data.
+- **MongoDB**: NoSQL database for storing application data
 
 
 ## Contact
